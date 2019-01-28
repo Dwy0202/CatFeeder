@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">Cat Mobile</string>
     <string name="Five">5</string>
+    <string name="login">Login</string>
+    <string name="open">Open</string>
+    <string name="close">close</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="cat_feeder">Cat Feeder</string>
+    <string name="food_bowl">Food Bowl</string>
+    <string name="heater_control">Heater Control</string>
+    <string name="temp_request">Temp Request</string>
+    <string name="request">Request</string>
 
 </resources>

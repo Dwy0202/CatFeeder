@@ -8,7 +8,7 @@ import android.os.Parcelable;
 import java.io.IOException;
 import java.util.Set;
 
-import io.particle.android.sdk.cloud.ParticleCloudException;
+import io.particle.android.sdk.cloud.exceptions.ParticleCloudException;
 import io.particle.android.sdk.cloud.ParticleDevice;
 
 /**

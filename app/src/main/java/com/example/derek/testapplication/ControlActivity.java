@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
-import io.particle.android.sdk.cloud.ParticleCloudException;
+import io.particle.android.sdk.cloud.exceptions.ParticleCloudException;
 import io.particle.android.sdk.cloud.ParticleCloudSDK;
 import io.particle.android.sdk.cloud.ParticleDevice;
 import io.particle.android.sdk.utils.Async;
@@ -37,33 +37,36 @@ public class ControlActivity extends AppCompatActivity {
         Button openDoor;
 
 
-        openDoor = (Button) findViewById(R.id.Plus180);
+        openDoor = findViewById(R.id.plus180);
         openDoor.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
 
                 Toaster.s(ControlActivity.this,"Open Request");
 
-                Async.executeAsync(myDevice.getMyDevice(), new Async.ApiWork<ParticleDevice, Integer>() {
+                try {
+                    Async.executeAsync(myDevice.getMyDevice(), new Async.ApiWork<ParticleDevice, Integer>() {
 
-                    public Integer callApi(ParticleDevice particleDevice)
-                            throws ParticleCloudException, IOException {
-                        System.out.println(myDevice.MyCallFunction("setpos"));
+                        public Integer callApi(ParticleDevice particleDevice) {
+                            System.out.println(myDevice.MyCallFunction("setpos"));
 
 
-                        return 0;
-                    }
+                            return 0;
+                        }
 
-                    @Override
-                    public void onSuccess(Integer value) {
-                        Toaster.s(ControlActivity.this, "Food Door is Open");
-                    }
+                        @Override
+                        public void onSuccess(Integer value) {
+                            Toaster.s(ControlActivity.this, "Food Door is Open");
+                        }
 
-                    @Override
-                    public void onFailure(ParticleCloudException e) {
-                        Log.e("some tag", "Something went wrong making an SDK call: ", e);
-                        Toaster.l(ControlActivity.this, "Uh oh, something went wrong.");
-                    }
-                });
+                        @Override
+                        public void onFailure(ParticleCloudException e) {
+                            Log.e("some tag", "Something went wrong making an SDK call: ", e);
+                            Toaster.l(ControlActivity.this, "Uh oh, something went wrong.");
+                        }
+                    });
+                } catch (ParticleCloudException e) {
+                    e.printStackTrace();
+                }
 
 
             }
