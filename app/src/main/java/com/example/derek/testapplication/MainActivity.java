@@ -18,11 +18,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import io.particle.android.sdk.cloud.ParticleCloudException;
 import io.particle.android.sdk.cloud.ParticleCloudSDK;
 import io.particle.android.sdk.cloud.ParticleDevice;
 import io.particle.android.sdk.utils.Toaster;
 import io.particle.android.sdk.utils.Async;
+import io.particle.android.sdk.cloud.exceptions.ParticleCloudException;
 
 import static io.particle.android.sdk.utils.Py.list;
 
@@ -61,27 +61,31 @@ public class MainActivity extends AppCompatActivity {
 
                 Toaster.s(MainActivity.this, "Open Request");
 
-                Async.executeAsync(myDevice.getMyDevice(), new Async.ApiWork<ParticleDevice, Integer>() {
+                try {
+                    Async.executeAsync(myDevice.getMyDevice(), new Async.ApiWork<ParticleDevice, Integer>() {
 
-                    public Integer callApi(ParticleDevice particleDevice)
-                            throws ParticleCloudException, IOException {
-                        System.out.println(myDevice.MyCallFunction("setpos"));
+                        public Integer callApi(ParticleDevice particleDevice)
+                                throws ParticleCloudException, IOException {
+                            System.out.println(myDevice.MyCallFunction("setpos"));
 
 
-                        return 0;
-                    }
+                            return 0;
+                        }
 
-                    @Override
-                    public void onSuccess(Integer value) {
-                        Toaster.s(MainActivity.this, "Food Door is Open");
-                    }
+                        @Override
+                        public void onSuccess(Integer value) {
+                            Toaster.s(MainActivity.this, "Food Door is Open");
+                        }
 
-                    @Override
-                    public void onFailure(ParticleCloudException e) {
-                        Log.e("some tag", "Something went wrong making an SDK call: ", e);
-                        Toaster.l(MainActivity.this, "Uh oh, something went wrong.");
-                    }
-                });
+                        @Override
+                        public void onFailure(ParticleCloudException e) {
+                            Log.e("some tag", "Something went wrong making an SDK call: ", e);
+                            Toaster.l(MainActivity.this, "Uh oh, something went wrong.");
+                        }
+                    });
+                } catch (ParticleCloudException e) {
+                    e.printStackTrace();
+                }
 
 
             }
@@ -97,27 +101,31 @@ public class MainActivity extends AppCompatActivity {
 
                 Toaster.s(MainActivity.this, "Close Request");
 
-                Async.executeAsync(myDevice.getMyDevice(), new Async.ApiWork<ParticleDevice, Integer>() {
+                try {
+                    Async.executeAsync(myDevice.getMyDevice(), new Async.ApiWork<ParticleDevice, Integer>() {
 
-                    public Integer callApi(ParticleDevice particleDevice)
-                            throws ParticleCloudException, IOException {
-                        System.out.println(myDevice.MyCallFunction("subpos"));
+                        public Integer callApi(ParticleDevice particleDevice)
+                                throws ParticleCloudException, IOException {
+                            System.out.println(myDevice.MyCallFunction("subpos"));
 
 
-                        return 0;
-                    }
+                            return 0;
+                        }
 
-                    @Override
-                    public void onSuccess(Integer value) {
-                        Toaster.s(MainActivity.this, "Food Door is Closed");
-                    }
+                        @Override
+                        public void onSuccess(Integer value) {
+                            Toaster.s(MainActivity.this, "Food Door is Closed");
+                        }
 
-                    @Override
-                    public void onFailure(ParticleCloudException e) {
-                        Log.e("some tag", "Something went wrong making an SDK call: ", e);
-                        Toaster.l(MainActivity.this, "Uh oh, something went wrong.");
-                    }
-                });
+                        @Override
+                        public void onFailure(ParticleCloudException e) {
+                            Log.e("some tag", "Something went wrong making an SDK call: ", e);
+                            Toaster.l(MainActivity.this, "Uh oh, something went wrong.");
+                        }
+                    });
+                } catch (ParticleCloudException e) {
+                    e.printStackTrace();
+                }
 
 
             }
@@ -132,27 +140,31 @@ public class MainActivity extends AppCompatActivity {
 
                 Toaster.s(MainActivity.this, "Power Outlet ON Request");
 
-                Async.executeAsync(myDevice.getMyDevice(), new Async.ApiWork<ParticleDevice, Integer>() {
+                try {
+                    Async.executeAsync(myDevice.getMyDevice(), new Async.ApiWork<ParticleDevice, Integer>() {
 
-                    public Integer callApi(ParticleDevice particleDevice)
-                            throws ParticleCloudException, IOException {
-                        System.out.println(myDevice.MyCallFunction("outletON"));
+                        public Integer callApi(ParticleDevice particleDevice)
+                                throws ParticleCloudException, IOException {
+                            System.out.println(myDevice.MyCallFunction("outletON"));
 
 
-                        return 0;
-                    }
+                            return 0;
+                        }
 
-                    @Override
-                    public void onSuccess(Integer value) {
-                        Toaster.s(MainActivity.this, "Power Outlet is ON");
-                    }
+                        @Override
+                        public void onSuccess(Integer value) {
+                            Toaster.s(MainActivity.this, "Power Outlet is ON");
+                        }
 
-                    @Override
-                    public void onFailure(ParticleCloudException e) {
-                        Log.e("some tag", "Something went wrong making an SDK call: ", e);
-                        Toaster.l(MainActivity.this, "Uh oh, something went wrong.");
-                    }
-                });
+                        @Override
+                        public void onFailure(ParticleCloudException e) {
+                            Log.e("some tag", "Something went wrong making an SDK call: ", e);
+                            Toaster.l(MainActivity.this, "Uh oh, something went wrong.");
+                        }
+                    });
+                } catch (ParticleCloudException e) {
+                    e.printStackTrace();
+                }
 
 
             }
@@ -166,28 +178,32 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View V) {
                 Toaster.s(MainActivity.this, "Power Outlet OFF Request");
 
-                Async.executeAsync(myDevice.getMyDevice(), new Async.ApiWork<ParticleDevice, Integer>() {
+                try {
+                    Async.executeAsync(myDevice.getMyDevice(), new Async.ApiWork<ParticleDevice, Integer>() {
 
-                    public Integer callApi(ParticleDevice particleDevice)
-                            throws ParticleCloudException, IOException {
-                        System.out.println(myDevice.MyCallFunction("outletOFF"));
+                        public Integer callApi(ParticleDevice particleDevice)
+                                throws ParticleCloudException, IOException {
+                            System.out.println(myDevice.MyCallFunction("outletOFF"));
 
 
-                        return 0;
-                    }
+                            return 0;
+                        }
 
-                    @Override
-                    public void onSuccess(Integer value) {
-                        Toaster.s(MainActivity.this, "Power Outlet is OFF");
-                    }
+                        @Override
+                        public void onSuccess(Integer value) {
+                            Toaster.s(MainActivity.this, "Power Outlet is OFF");
+                        }
 
-                    @Override
-                    public void onFailure(ParticleCloudException e) {
-                        Log.e("some tag", "Something went wrong making an SDK call: ", e);
-                        Toaster.l(MainActivity.this, "Uh oh, something went wrong.");
-                    }
+                        @Override
+                        public void onFailure(ParticleCloudException e) {
+                            Log.e("some tag", "Something went wrong making an SDK call: ", e);
+                            Toaster.l(MainActivity.this, "Uh oh, something went wrong.");
+                        }
 
-                });
+                    });
+                } catch (ParticleCloudException e) {
+                    e.printStackTrace();
+                }
             }
 
         });
@@ -198,27 +214,31 @@ public class MainActivity extends AppCompatActivity {
 
                 Toaster.s(MainActivity.this, "Temperature Requested");
 
-                Async.executeAsync(myDevice.getMyDevice(), new Async.ApiWork<ParticleDevice, Integer>() {
+                try {
+                    Async.executeAsync(myDevice.getMyDevice(), new Async.ApiWork<ParticleDevice, Integer>() {
 
-                    public Integer callApi(ParticleDevice particleDevice)
-                            throws ParticleCloudException, IOException {
-                        return myDevice.MyCallFunction("getTemp");
+                        public Integer callApi(ParticleDevice particleDevice)
+                                throws ParticleCloudException, IOException {
+                            return myDevice.MyCallFunction("getTemp");
 
 
-                    }
+                        }
 
-                    @Override
-                    public void onSuccess(Integer value) {
-                        Toaster.s(MainActivity.this, "Temperature is " + value + " degrees");
-                    }
+                        @Override
+                        public void onSuccess(Integer value) {
+                            Toaster.s(MainActivity.this, "Temperature is " + value + " degrees");
+                        }
 
-                    @Override
-                    public void onFailure(ParticleCloudException e) {
-                        Log.e("Tag", "Something went wrong with making SDK call: ", e);
-                        Toaster.l(MainActivity.this, "Uh oh, something went wrong.");
-                    }
+                        @Override
+                        public void onFailure(ParticleCloudException e) {
+                            Log.e("Tag", "Something went wrong with making SDK call: ", e);
+                            Toaster.l(MainActivity.this, "Uh oh, something went wrong.");
+                        }
 
-                });
+                    });
+                } catch (ParticleCloudException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
